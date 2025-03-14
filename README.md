@@ -2,7 +2,7 @@
 
 ![Zeka_Dashboard](https://github.com/user-attachments/assets/ea5227f3-9211-4d13-8f31-aeec7d3b1ac4)
 
-Zeka is an original micro SaaS application developed by Hervé M'Bilo
+Zeka is an original micro SaaS application.
 
 
 ## Features
