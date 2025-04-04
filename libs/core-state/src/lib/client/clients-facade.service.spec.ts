@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BeneficiariesService } from './beneficiaries.service';
+import { BeneficiariesFacade } from './clients-facade.service';
 
-describe('BeneficiariesService', () => {
-  let service: BeneficiariesService;
+describe('BeneficiariesFacadeService', () => {
+  let service: BeneficiariesFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BeneficiariesService);
+    service = TestBed.inject(BeneficiariesFacade);
   });
 
   test('should be created', () => {
