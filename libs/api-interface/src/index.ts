@@ -22,4 +22,6 @@ export * from './lib/Teams/Teams';
 export * from './lib/StaffMember/StaffMember';
 export * from './lib/StaffMember/StaffMembers';
 export * from './lib/Dashboard/Dashboard';
+export * from './lib/Client/Client';
+export * from './lib/Client/ClientLookUp';
 

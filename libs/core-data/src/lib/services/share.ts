@@ -130,3 +130,7 @@ export function blobToText(blob: any): Observable<string> {
   }
 
   export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
+
+  export function capitalize(value: string){
+    return typeof value === 'string' && value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() || value;
+  }

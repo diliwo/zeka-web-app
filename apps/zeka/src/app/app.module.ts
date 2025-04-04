@@ -17,6 +17,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { DashboardComponent } from './dahsboard/dashboard.component';
 import { RightItemListComponent } from './dahsboard/right-item-list/right-item-list.component';
 import { LeftItemListComponent } from './dahsboard/left-item-list/left-item-list.component';
+import { SearchClientComponent } from './toolbar/search-client/search-client.component';
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { LeftItemListComponent } from './dahsboard/left-item-list/left-item-list
     ToolbarComponent,
     DashboardComponent,
     RightItemListComponent,
-    LeftItemListComponent
+    LeftItemListComponent,
+    SearchClientComponent
+
   ],
   imports: [
     CoreDataModule,

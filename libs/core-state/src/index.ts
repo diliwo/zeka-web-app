@@ -21,4 +21,5 @@ export { TrainingFieldsFacadeService } from './lib/trainingFields/trainingFields
 export { TrainingTypesFacadeService } from './lib/trainingTypes/trainingTypes-facade.service';
 export { TrainingTypeDataSource} from './lib/trainingTypes/TrainingTypesDataSource';
 export { StateService } from './lib/helpers/state.service';
+export { ClientsFacade } from './lib/client/clients-facade.service';
 export { MatTableState } from './lib/helpers/mattable.state';

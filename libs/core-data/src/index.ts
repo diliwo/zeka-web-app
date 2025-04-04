@@ -12,3 +12,4 @@ export {TrainingFieldService} from './lib/services/trainingField.service';
 export {TrainingTypeService} from './lib/services/trainingType.service';
 export { ConfigService } from './lib/services/config.service';
 export { AppConfigs } from './lib/services/config.service';
+export { ClientService} from './lib/services/client.service';

@@ -1,6 +1,7 @@
 import { result } from "lodash-es";
 import { Bilan } from "./Bilans/BilanMv";
 import { EmploymentStatusItem } from "./Candidacies/EmploymentStatusItem";
+import { ClientLookUp } from "./Client/ClientLookUp";
 
 
 // Roles
@@ -756,7 +757,7 @@ export interface IJobDetail {
   jobOffers: JobOfferDetail[];
   nameOfhired: string;
   numOffer: string;
-  candidacies: clientLookUp[];
+  candidacies: ClientLookUp[];
   hasDocumentAttached: boolean;
   occupiedBy: string;
   occupiedFrom: Date;
@@ -797,7 +798,7 @@ export class JobDetail implements IJobDetail {
   jobOffers: JobOfferDetail[];
   nameOfhired: string;
   numOffer: string;
-  candidacies: clientLookUp[];
+  candidacies: ClientLookUp[];
   hasDocumentAttached: boolean;
   occupiedBy: string;
   occupiedFrom: Date;
@@ -820,7 +821,7 @@ export class JobDetail implements IJobDetail {
       this.jobNumber = data['jobNumber'];
       this.jobTitle = data['jobTitle'];
       this.reward = data['reward'];
-      this.rewardName = RewardConvertor(data['reward']);
+      this.rewardName = "No"
       this.commentReward = data['commentReward'];
       this.isVacant = data['isVacant'];
       this.comment = data['comment'];
@@ -1225,291 +1226,6 @@ export class SupportDetail implements ISupportDetail {
     return data;
   }
 }
-//----------End Supports
-
-//----------Start client
-export interface IclientDetail {
-  clientId?: string | undefined;
-  referenceNumber: string;
-  civilStatus: string;
-  firstname: string;
-  lastname: string;
-  fullName: string | undefined;
-  gender: string;
-  birthDate: Date | undefined;
-  startDateInCpas: Date;
-  endDateInCpas: Date;
-  nationality: string;
-  niss: string;
-  email?: string | undefined;
-  phone?: string | undefined;
-  supportStaffMemberName?: string | undefined;
-  supportStaffMemberService?: string | undefined;
-  supportStartDate?: Date | undefined;
-  supportEndDate?: Date | undefined;
-  supports?: any[] | undefined;
-  nativeLanguage?: string | undefined;
-  contactLanguage: string;
-  address?: string | undefined;
-  lasttrainingName: string;
-  lasttrainingNote: string;
-  lasttrainingResult: number;
-  lasttrainingResultName: string;
-  lasttrainingStartDate: Date;
-  lasttrainingEndDate: Date;
-  socialWorkerName?: string | undefined;
-  lastJobExperienceCompanyName: string;
-  lastJobExperienceContractTypeName: string;
-  lastJobExperienceFunction: string;
-  lastJobExperienceStartDate: Date;
-  lastJobExperienceEndDate: Date;
-  contratPiis:ContratPiis;
-  lastEvaluationDate:Date;
-}
-
-export class clientDetail implements IclientDetail {
-  clientId?: string;
-  referenceNumber: string;
-  civilStatus: string;
-  firstname: string;
-  lastname: string;
-  fullName: string | undefined;
-  gender: string;
-  birthDate: Date;
-  startDateInCpas: Date;
-  endDateInCpas: Date;
-  nationality: string;
-  niss: string;
-  email?: string;
-  phone?: string;
-  mobilePhone?: string;
-  supportStaffMemberName?: string | undefined;
-  supportStaffMemberService?: string | undefined;
-  supportStartDate?: Date | undefined;
-  supportEndDate?: Date | undefined;
-  supports?: any[] | undefined;
-  nativeLanguage?: string;
-  contactLanguage: string;
-  address?: string;
-  candidacies?: any[] | undefined;
-  lasttrainingName: string;
-  lasttrainingNote: string;
-  lasttrainingResult: number;
-  lasttrainingResultName: string;
-  lasttrainingStartDate: Date;
-  lasttrainingEndDate: Date;
-  socialWorkerName?: string;
-  lastJobExperienceCompanyName: string;
-  lastJobExperienceContractTypeName: string;
-  lastJobExperienceFunction: string;
-  lastJobExperienceStartDate: Date;
-  lastJobExperienceEndDate: Date;
-  contratPiis:ContratPiis;
-  lastEvaluationDate:Date;
-  ibisNumber: string;
-
-  constructor(data?: IclientDetail) {
-    if (data) {
-      for (var property in data) {
-        if (data.hasOwnProperty(property))
-          (<any>this)[property] = (<any>data)[property];
-      }
-    }
-  }
-
-  init(data?: any) {
-    if (data) {
-      this.clientId = data['clientId'];
-      this.referenceNumber = data['referenceNumber'];
-      this.civilStatus = CivilStatusConvertor(data['civilStatus']);
-      this.firstname = data['firstName'];
-      this.lastname = data['lastName'];
-      this.fullName = data['lastName'] +' '+ capitalize(data['firstName']);
-      this.gender = data['gender'] == 0 ? 'H' : 'F';
-      this.birthDate = data['birthDate'];
-      this.startDateInCpas = data['startDateInCpas'];
-      this.endDateInCpas = data['endDateInCpas'];
-      this.nationality = data['nationality'];
-      this.niss = data['niss'];
-      this.email = data['email'];
-      this.phone = data['phone'];
-      this.mobilePhone = data['mobilePhone'];
-      this.supportStaffMemberName = data['supportStaffMemberName'];
-      this.supportStaffMemberService = data['supportStaffMemberService'];
-      this.supportStartDate = data['supportStartDate'];
-      this.supportEndDate = data['supportEndDate'];
-      this.nativeLanguage = data['nativeLanguage'];
-      this.contactLanguage = data['contactLanguage'];
-      this.address = data['address'];
-      this.candidacies = data['candidacies'];
-      this.lasttrainingName = data['lasttrainingName']
-        ? data['lasttrainingName']
-        : '-';
-      this.lasttrainingNote = data['lasttrainingNote'];
-      this.lasttrainingResult = data['lasttrainingResult'];
-      this.lasttrainingResultName = data['lasttrainingResult']
-        ? ResultConvertor(data['lasttrainingResult'])
-        : '-';
-      this.lasttrainingStartDate = data['lasttrainingStartDate'];
-      this.lasttrainingEndDate = data['lasttrainingEndDate'];
-      this.socialWorkerName = data['socialWorkerName'];
-      this.lastJobExperienceCompanyName = data['lastJobExperienceCompanyName'];
-      this.lastJobExperienceContractTypeName = typeOfContractConvertor(data['lastJobExperienceContractTypeName']);
-      this.lastJobExperienceFunction = data['lastJobExperienceFunction'];
-      this.lastJobExperienceStartDate = data['lastJobExperienceStartDate'];
-      this.lastJobExperienceEndDate = data['lastJobExperienceEndDate'];
-      this.contratPiis = ContratPiis.fromJS(data['contratPiis']);
-      this.lastEvaluationDate = data['lastEvaluationDate'];
-      this.ibisNumber = data['ibisNumber'];
-
-      if (Array.isArray(data['supports'])) {
-        this.supports = [] as any;
-        for (let item of data['supports'])
-          this.supports!.push(SupportDetail.fromJS(item));
-      }
-    }
-  }
-
-  static fromJS(data: any): clientDetail {
-    data = typeof data === 'object' ? data : {};
-    let result = new clientDetail();
-    result.init(data);
-    return result;
-  }
-
-  toJSON(data?: any) {
-    data = typeof data === 'object' ? data : {};
-    data['clientId'] = this.clientId;
-    data['referenceNumber'] = this.referenceNumber;
-    data['civilStatus'] = this.civilStatus;
-    data['firstname'] = this.firstname;
-    data['lastname'] = this.lastname;
-    data['gender'] = this.gender;
-    data['birthDate'] = this.birthDate;
-    data['startDateInCpas'] = this.startDateInCpas;
-    data['endDateInCpas'] = this.endDateInCpas;
-    data['nationality'] = this.nationality;
-    data['niss'] = this.niss;
-    data['email'] = this.email;
-    data['phone'] = this.phone;
-    data['mobilePhone'] = this.mobilePhone;
-    data['supportStaffMemberName'] = this.supportStaffMemberName;
-    data['supportStaffMemberService'] = this.supportStaffMemberService;
-    data['supportStartDate'] = this.supportStartDate;
-    data['supportEndDate'] = this.supportEndDate;
-    data['nativeLanguage'] = this.nativeLanguage;
-    data['contactLanguage'] = this.contactLanguage;
-    data['address'] = this.address;
-    data['candidacies'] = this.candidacies;
-    data['socialWorkerName'] = this.socialWorkerName;
-
-    if (Array.isArray(this.supports)) {
-      data['supports'] = [];
-      for (let item of this.supports) data['supports'].push(item.toJSON());
-    }
-    return data;
-  }
-}
-
-export interface IclientLookUp {
-  clientId: string | null;
-  referenceNumber: string;
-  name: string;
-  niss: string;
-  socialWorkerName: string;
-}
-
-export class clientLookUp implements IclientLookUp {
-  clientId: string;
-  referenceNumber: string;
-  name: string;
-  niss: string;
-  socialWorkerName: string
-
-  constructor(data?: IclientLookUp) {
-    if (data) {
-      for (var property in data) {
-        if (data.hasOwnProperty(property))
-          (<any>this)[property] = (<any>data)[property];
-      }
-    }
-  }
-
-  init(data: any) {
-    if (data) {
-      this.clientId = data['clientId'];
-      this.referenceNumber = data['referenceNumber'];
-      this.name = data['name'];
-      this.niss = data['niss'];
-      this.socialWorkerName = data['socialWorkerName'];
-    }
-  }
-
-  static fromJS(data: any): clientLookUp {
-    data = typeof data === 'object' ? data : {};
-    let result = new clientLookUp();
-    result.init(data);
-    return result;
-  }
-
-  toJSON(data?: any) {
-    data = typeof data === 'object' ? data : {};
-    data['clientId'] = this.clientId;
-    data['referenceNumber'] = this.referenceNumber;
-    data['name'] = this.name;
-    data['niss'] = this.niss;
-    data['socialWorkerName'] = this.socialWorkerName;
-    return data;
-  }
-}
-
-export interface IBeneficiariesLookUp {
-  beneficiariesLookUp?: clientLookUp[] | undefined;
-}
-
-export class BeneficiariesLookUp implements IBeneficiariesLookUp {
-  beneficiariesLookUp?: clientLookUp[] | undefined;
-
-  constructor(data?: IBeneficiariesLookUp) {
-    if (data) {
-      for (var property in data) {
-        if (data.hasOwnProperty(property))
-          (<any>this)[property] = (<any>data)[property];
-      }
-    }
-  }
-
-  init(data?: any) {
-    if (data) {
-      if (Array.isArray(data['beneficiaries'])) {
-        this.beneficiariesLookUp = [] as any;
-        for (let item of data['beneficiaries'])
-          this.beneficiariesLookUp!.push(clientLookUp.fromJS(item));
-      }
-    }
-  }
-
-  static fromJS(data: any): BeneficiariesLookUp {
-    data = typeof data === 'object' ? data : {};
-    let result = new BeneficiariesLookUp();
-    result.init(data);
-    return result;
-  }
-
-  toJSON(data?: any) {
-    data = typeof data === 'object' ? data : {};
-    if (Array.isArray(this.beneficiariesLookUp)) {
-      data['beneficiaries'] = [];
-      for (let item of this.beneficiariesLookUp)
-        data['beneficiaries'].push(item.toJSON());
-    }
-    return data;
-  }
-}
-
-// ---------End client
-
-// ---- Start Contrat Piis
 
 export interface IContratPiis {
   libelle: string;
@@ -1638,63 +1354,6 @@ function ConvertProjectsToString(projects : string[]): string {
     for (let item of projects){
       result += item + "\n";
     }
-  }
-  return result;
-}
-function CivilStatusConvertor(sociabiliCivilStatusCode: number): string {
-  let result: string;
-
-  switch (sociabiliCivilStatusCode) {
-    case 1:
-      result = 'Célibataire';
-      break;
-    case 2:
-      result = 'Marié(e)';
-      break;
-    case 3:
-      result = 'Veuf(ve)';
-      break;
-    case 4:
-      result = 'Divorcé(e)';
-      break;
-    case 5:
-      result = 'Partenariat';
-      break;
-    default:
-      result = 'Indéterminé';
-      break;
-  }
-  return result;
-}
-
-function RewardConvertor(Reward: number): string {
-  let result: string;
-
-  switch (Reward) {
-    case 1:
-      result = '318';
-      break;
-    case 2:
-      result = '530';
-      break;
-    case 3:
-      result = '688';
-      break;
-    case 4:
-      result = 'totale';
-      break;
-    case 5:
-      result = 'Eco soc';
-      break;
-    case 6:
-      result = 'Exonération';
-      break;
-    case 7:
-      result = 'Dérogation';
-      break;
-    default:
-      result = 'Echange de service';
-      break;
   }
   return result;
 }
@@ -2561,8 +2220,5 @@ export function StatutOfPartnerConvertor(CategoryOfPartner: number): string {
   return result;
 }
 
-function capitalize(value: string){
-  return typeof value === 'string' && value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() || value;
-}
 
 
