@@ -6,10 +6,10 @@ import { Subject } from 'rxjs';
 })
 export class PositionFacadeService {
   private position = new Subject<string>();
-  private benefId = new Subject<number>();
+  private clientId = new Subject<number>();
 
   position$ = this.position.asObservable();
-  benefId$ = this.benefId.asObservable();
+  clientId$ = this.clientId.asObservable();
 
   constructor() { }
 
@@ -19,9 +19,9 @@ export class PositionFacadeService {
     }, 0);
   }
 
-  getclientId(id:number){
+  getClientId(id:number){
     setTimeout(() => {
-      this.benefId.next(id);
+      this.clientId.next(id);
     }, 0);
   }
 }

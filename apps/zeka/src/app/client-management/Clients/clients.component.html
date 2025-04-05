@@ -1,0 +1,6 @@
+<div *ngIf="(selectedBeneficiary$ | async) as Client; else loading" class="container mat-elevation-z0">
+    <frontend-client-details [beneficiary]="beneficiaryDetail"></frontend-client-details>
+</div>
+<ng-template #loading>
+    <mat-spinner class="green-spinner"></mat-spinner>
+</ng-template>

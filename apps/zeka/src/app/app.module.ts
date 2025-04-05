@@ -18,6 +18,8 @@ import { DashboardComponent } from './dahsboard/dashboard.component';
 import { RightItemListComponent } from './dahsboard/right-item-list/right-item-list.component';
 import { LeftItemListComponent } from './dahsboard/left-item-list/left-item-list.component';
 import { SearchClientComponent } from './toolbar/search-client/search-client.component';
+import { ClientManagementModule } from './client-management/client-management.module';
+import { AddClientComponent } from './toolbar/add-client/add-client.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { SearchClientComponent } from './toolbar/search-client/search-client.com
     DashboardComponent,
     RightItemListComponent,
     LeftItemListComponent,
-    SearchClientComponent
+    SearchClientComponent,
+    AddClientComponent
 
   ],
   imports: [
@@ -40,7 +43,8 @@ import { SearchClientComponent } from './toolbar/search-client/search-client.com
     HttpClientModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ClientManagementModule
   ],
   providers: [
     ConfigService,

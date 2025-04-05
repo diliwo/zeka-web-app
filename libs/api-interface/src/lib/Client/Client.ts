@@ -2,15 +2,16 @@ import { capitalize } from "libs/core-data/src/lib/services/share";
 
 export interface IClient {
   clientId?: string;
-  civilStatus: string;
+  referenceNumber?: string;
+  civilStatus?: string;
   firstname: string;
   lastname: string;
   fullName: string | undefined;
   gender: string;
   birthDate: Date | undefined;
-  placeOfBith: string | undefined;
-  nationality: string;
-  ssn: string;
+  placeOfBith?: string | undefined;
+  nationality?: string;
+  ssn?: string;
   email?: string | undefined;
   phone?: string | undefined;
   mobilePhone?: string;
@@ -20,21 +21,22 @@ export interface IClient {
   supportEndDate?: Date | undefined;
   supports?: any[] | undefined;
   nativeLanguage?: string | undefined;
-  contactLanguage: string;
+  contactLanguage?: string;
   address?: string | undefined;
 }
 
 export class Client implements IClient {
   clientId?: string;
-  civilStatus: string;
+  referenceNumber?: string;
+  civilStatus?: string;
   firstname: string;
   lastname: string;
   fullName: string | undefined;
   gender: string;
   birthDate: Date | undefined;
-  placeOfBith: string | undefined;
-  nationality: string;
-  ssn: string;
+  placeOfBith?: string | undefined;
+  nationality?: string;
+  ssn?: string;
   email?: string | undefined;
   phone?: string | undefined;
   mobilePhone?: string;
@@ -44,7 +46,7 @@ export class Client implements IClient {
   supportEndDate?: Date | undefined;
   supports?: any[] | undefined;
   nativeLanguage?: string | undefined;
-  contactLanguage: string;
+  contactLanguage?: string;
   address?: string | undefined;
 
   constructor(data?: IClient) {

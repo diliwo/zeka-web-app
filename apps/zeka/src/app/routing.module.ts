@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: '', component: DashboardComponent
   },
+  {
+    path: 'beneficiary/:niss', data: { preload: true },
+    loadChildren: () => import('./client-management/client-management.module').then(m => m.ClientManagementModule)
+  },
   { path: 'admin',
     loadChildren: () => import('./admin-area-management/admin-area-management.module').then(m => m.AdminAreaManagementModule),
   },

@@ -1,7 +1,7 @@
 <div style="display:flex; width: 100%;">
 <form class="example-form">
     <mat-form-field class="example-full-width">
-        <mat-label>Saisissez le niss, le nom ou le n° de dossier du bénéficiaire </mat-label>
+        <mat-label>Search for a client by typing their name</mat-label>
         <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let option of (allClientsLookUp$ | async)?.clientsLookUp" [value]="option" (click)="onSelectClient()">
