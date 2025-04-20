@@ -13,7 +13,7 @@
               </mat-form-field>
             </td>
             <td>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" [style.width.px]="250">
               <mat-label>Social Security Number</mat-label>
               <input
                 matInput
@@ -35,7 +35,7 @@
                   [formControl]="ctlGender"
                   required
                 >
-                  <mat-option *ngFor="let element of status" [value]="element.id">
+                  <mat-option *ngFor="let element of sex" [value]="element.id">
                     {{ element.value }}
                   </mat-option>
                 </mat-select>
@@ -48,7 +48,7 @@
               </mat-form-field>
             </td>
             <td>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" [style.width.px]="230">
                 <mat-label>Lastname</mat-label>
                 <input matInput placeholder="Firstname" [formControl]="ctlLastName" required />
               </mat-form-field>
@@ -56,25 +56,71 @@
           </tr>
           </table>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Date of Birth</mat-label>
-          <input matInput placeholder="Date of birth"  name="startDate" [formControl]="ctlBirthDate" [matDatepicker]="startdatepicker" required>
-          <mat-datepicker-toggle matIconSuffix [for]="startdatepicker"></mat-datepicker-toggle>
-          <mat-datepicker  [dateClass]="" #startdatepicker></mat-datepicker>
-        </mat-form-field>
+        <table>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill" [style.width.px]="300">
+                <mat-label>Civil Status</mat-label>
+                <mat-select
+                  placeholder="CiviStatus"
+                  [formControl]="ctlCivilStatus"
+                  required
+                >
+                  <mat-option *ngFor="let element of civilStatus" [value]="element.id">
+                    {{ element.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput placeholder="Date of birth"  name="startDate" [formControl]="ctlBirthDate" [matDatepicker]="startdatepicker" required>
+              <mat-datepicker-toggle matIconSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+              <mat-datepicker  [dateClass]="" #startdatepicker></mat-datepicker>
+            </mat-form-field>
+          </td>
+          </tr>
+        </table>
 
         <table>
           <tr>
             <td>
               <mat-form-field appearance="fill" [style.width.px]="300" >
                 <mat-label>Place of Birth</mat-label>
-                <input matInput placeholder="PlaceOfBirth" [formControl]="ctlPlaceOfBirth" />
+                <mat-select matInput placeholder="PlaceOfBirth" [formControl]="ctlPlaceOfBirthId" required>
+                  <input
+                  placeholder="Search for..."
+                  matInput
+                  type="text"
+                  (keyup)="onSearch($event.target.value,'city')"
+                  class="search-box"
+                  oninput="this.value"
+                  #chercher
+                  />
+                  <mat-option *ngFor="let city of filteredCities" [value]="city.name">
+                      {{city.name}} ({{city.country}})
+                  </mat-option>
+              </mat-select>
               </mat-form-field>
             </td>
             <td>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" [style.width.px]="250">
                 <mat-label>Nationality</mat-label>
-                <input matInput placeholder="Nationality" [formControl]="ctlNationality" />
+                <mat-select matInput placeholder="Nationality" [formControl]="ctlNationalityId" required>
+                  <input
+                  placeholder="Search for..."
+                  matInput
+                  type="text"
+                  (keyup)="onSearch($event.target.value,'nationality')"
+                  class="search-box"
+                  oninput="this.value"
+                  #chercher
+                  />
+                  <mat-option *ngFor="let nationality of filteredNationalities" [value]="nationality.name">
+                      {{nationality.name}}
+                  </mat-option>
+              </mat-select>
               </mat-form-field>
             </td>
           </tr>
@@ -154,11 +200,20 @@
             <td>
               <mat-form-field appearance="fill" [style.width.px]="350">
                 <mat-label>City</mat-label>
-                <input
+                <mat-select matInput placeholder="City" [formControl]="ctlAddressCity">
+                  <input
+                  placeholder="Search for..."
                   matInput
-                  placeholder="City"
-                  [formControl]="ctlAddressCity"
-                />
+                  type="text"
+                  (keyup)="onSearch($event.target.value,'city')"
+                  class="search-box"
+                  oninput="this.value"
+                  #chercher
+                  />
+                  <mat-option *ngFor="let city of filteredCities" [value]="city.name">
+                      {{city.name}}
+                  </mat-option>
+              </mat-select>
               </mat-form-field>
             </td>
             <td>

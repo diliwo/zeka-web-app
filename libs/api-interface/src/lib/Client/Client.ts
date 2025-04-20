@@ -1,4 +1,5 @@
 import { capitalize } from "libs/core-data/src/lib/services/share";
+import { Address } from "./Address";
 
 export interface IClient {
   clientId?: string;
@@ -22,7 +23,7 @@ export interface IClient {
   supports?: any[] | undefined;
   nativeLanguage?: string | undefined;
   contactLanguage?: string;
-  address?: string | undefined;
+  address?: Address;
 }
 
 export class Client implements IClient {
@@ -47,7 +48,7 @@ export class Client implements IClient {
   supports?: any[] | undefined;
   nativeLanguage?: string | undefined;
   contactLanguage?: string;
-  address?: string | undefined;
+  address?: Address;
 
   constructor(data?: IClient) {
     if (data) {
@@ -78,7 +79,7 @@ export class Client implements IClient {
       this.supportEndDate = data['supportEndDate'];
       this.nativeLanguage = data['nativeLanguage'];
       this.contactLanguage = data['contactLanguage'];
-      this.address = data['address'];
+      this.address = Address.fromJS(data['address']);
 
       // if (Array.isArray(data['supports'])) {
 

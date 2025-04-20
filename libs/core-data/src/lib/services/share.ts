@@ -134,3 +134,14 @@ export function blobToText(blob: any): Observable<string> {
   export function capitalize(value: string){
     return typeof value === 'string' && value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() || value;
   }
+
+  export function ConvertAddresstoJSON(number: number, street: string,postalcode: string, city: string, country: string) {
+    let data = {}
+    data['address']['number'] = number;
+    data['address']['street'] = street;
+    data['address']['boxNumber'] = this.boxNumber;
+    data['address']['postalCode'] = postalcode;
+    data['address']['city'] = city;
+    data['address']['country'] = city;
+    return data;
+  }

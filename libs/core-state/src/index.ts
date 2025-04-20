@@ -1,4 +1,5 @@
 export * from './lib/core-state.module';
+
 export { TeamsFacadeService } from './lib/teams/teams-facade.service';
 export { StaffMembersFacadeService } from './lib/staffMembers/staffMembers-facade.service';
 export { TrainingsFacadeService } from './lib/trainings/trainings-facade.service';
@@ -23,3 +24,5 @@ export { TrainingTypeDataSource} from './lib/trainingTypes/TrainingTypesDataSour
 export { StateService } from './lib/helpers/state.service';
 export { ClientsFacade } from './lib/client/clients-facade.service';
 export { MatTableState } from './lib/helpers/mattable.state';
+export { CitiesFacadeService } from'./lib/cities/cities-facade.service';
+export { NationalitiesFacadeService } from './lib/nationalities/nationalities-facade.service';

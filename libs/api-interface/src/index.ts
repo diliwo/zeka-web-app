@@ -24,4 +24,8 @@ export * from './lib/StaffMember/StaffMembers';
 export * from './lib/Dashboard/Dashboard';
 export * from './lib/Client/Client';
 export * from './lib/Client/ClientLookUp';
+export * from './lib/Cities/Citiy';
+export * from './lib/Cities/Cities';
+export * from './lib/Nationalities/Nationalities';
+export * from './lib/Nationalities/Nationality';
 

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ClientsFacade, PositionFacadeService } from '@frontend/core-state';
+import { CitiesFacadeService, ClientsFacade, NationalitiesFacadeService, PositionFacadeService } from '@frontend/core-state';
 import { Observable, Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AddClientComponent } from './add-client/add-client.component';
-import { Client } from '@frontend/api-interface';
+import { Cities, City, Client, Nationality } from '@frontend/api-interface';
 
 @Component({
   selector: 'frontend-toolbar',
@@ -22,11 +22,16 @@ export class ToolbarComponent implements OnInit {
   isBeneficiarySelected: boolean;
   public currentUserDecodedToken: string[];
 
+  cities: City[] = [];
+  nationalities: Nationality[] = [];
+
   @Output() createClientEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private positionFacadeService: PositionFacadeService,
     private clientsfacade: ClientsFacade,
+    private nationalitiesFacadeService: NationalitiesFacadeService,
+    private citiesFacadeService: CitiesFacadeService,
     private router: Router,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
@@ -37,11 +42,13 @@ export class ToolbarComponent implements OnInit {
     this.positionFacadeService.clientId$.subscribe((benefId) => {
       this.isBeneficiarySelected = benefId !== null;
     });
+    this.loadCities();
+    this.loadNationalities();
   }
 
   add() {
     const client = new Client();
-    const dlg = this.dialog.open(AddClientComponent, { data: { client, isNew: true },disableClose: true});
+    const dlg = this.dialog.open(AddClientComponent, { data: { client, nationalities: this.nationalities, cities: this.cities, isNew: true },disableClose: true});
     dlg.beforeClosed().subscribe(res => {
         if (res) {
           console.log(res);
@@ -50,4 +57,19 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
+  loadCities(){
+    this.cities = null;
+    this.citiesFacadeService.load(1,1000,'','name asc');
+    this.citiesFacadeService.cities$.subscribe((data) => {
+      this.cities = data.items;
+    });
+  }
+
+  loadNationalities(){
+    this.nationalities = null;
+    this.nationalitiesFacadeService.load(1,1000,'','name asc');
+    this.nationalitiesFacadeService.nationalities$.subscribe((data) => {
+      this.nationalities = data.items;
+    });
+  }
 }

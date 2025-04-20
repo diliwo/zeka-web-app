@@ -49,7 +49,7 @@ export class ClientService implements IClientService {
   }
 
   allClientsLookUp(): Observable<ClientsLookUp> {
-    let url_ = this.baseUrl + '/api/clients';
+    let url_ = this.baseUrl + '/clients';
     url_ = url_.replace(/[?&]$/, '');
     let options_: any = {
       observe: 'response',
@@ -130,7 +130,7 @@ export class ClientService implements IClientService {
   }
 
   getclientByClientId(clientId: number): Observable<Client> {
-    let url_ = this.baseUrl + '/api/clients/{clientid}';
+    let url_ = this.baseUrl + '/clients/{clientid}';
     if (clientId === undefined || clientId === null)
       throw new Error("The parameter 'clientid' must be defined.");
     url_ = url_.replace('{clientid}', encodeURIComponent('' + clientId));
@@ -230,7 +230,7 @@ export class ClientService implements IClientService {
   }
 
   create(command: Client): Observable<void> {
-    let url_ = this.baseUrl + '/api/clients';
+    let url_ = this.baseUrl + '/clients';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(command);
@@ -241,6 +241,7 @@ export class ClientService implements IClientService {
       responseType: 'blob',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'Tenant':'Zeka'
       }),
     };
 
@@ -308,7 +309,7 @@ export class ClientService implements IClientService {
 
   updateLanguage(niss: string, language: string): Observable<void> {
     console.log(niss,language);
-    let url_ = this.baseUrl + '/api/clients/updatelanguage/{niss}/{language}';
+    let url_ = this.baseUrl + '/clients/updatelanguage/{niss}/{language}';
     url_ = url_.replace('{niss}', encodeURIComponent('' + niss));
     url_ = url_.replace('{language}', encodeURIComponent('' + language));
     url_ = url_.replace(/[?&]$/, '');

@@ -13,3 +13,5 @@ export {TrainingTypeService} from './lib/services/trainingType.service';
 export { ConfigService } from './lib/services/config.service';
 export { AppConfigs } from './lib/services/config.service';
 export { ClientService} from './lib/services/client.service';
+export { CitiesService } from './lib/services/cities.service';
+export { NationalitiesService } from './lib/services/nationalities.service';
