@@ -49,7 +49,7 @@ export class ClientService implements IClientService {
   }
 
   allClientsLookUp(): Observable<ClientsLookUp> {
-    let url_ = this.baseUrl + '/api/clients';
+    let url_ = this.baseUrl + '/clients';
     url_ = url_.replace(/[?&]$/, '');
     let options_: any = {
       observe: 'response',
@@ -130,7 +130,7 @@ export class ClientService implements IClientService {
   }
 
   getclientByClientId(clientId: number): Observable<Client> {
-    let url_ = this.baseUrl + '/api/clients/{clientid}';
+    let url_ = this.baseUrl + '/clients/{clientid}';
     if (clientId === undefined || clientId === null)
       throw new Error("The parameter 'clientid' must be defined.");
     url_ = url_.replace('{clientid}', encodeURIComponent('' + clientId));
@@ -229,18 +229,19 @@ export class ClientService implements IClientService {
     return _observableOf<Client>(<any>null);
   }
 
-  import(niss: string): Observable<number> {
-    let url_ = this.baseUrl + '/api/s/{niss}/import';
-    url_ = url_.replace('{niss}', encodeURIComponent('' + niss));
+  create(command: Client): Observable<void> {
+    let url_ = this.baseUrl + '/clients';
     url_ = url_.replace(/[?&]$/, '');
 
-    const content_ = JSON.stringify(niss);
+    const content_ = JSON.stringify(command);
+
     let options_: any = {
       body: content_,
       observe: 'response',
       responseType: 'blob',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'Tenant':'Zeka'
       }),
     };
 
@@ -248,23 +249,23 @@ export class ClientService implements IClientService {
       .request('post', url_, options_)
       .pipe(
         _observableMergeMap((response_: any) => {
-          return this.processImport(response_);
+          return this.processCreate(response_);
         })
       )
       .pipe(
         _observableCatch((response_: any) => {
           if (response_ instanceof HttpResponseBase) {
             try {
-              return this.processImport(<any>response_);
+              return this.processCreate(<any>response_);
             } catch (e) {
-              return <Observable<number>>(<any>_observableThrow(e));
+              return <Observable<void>>(<any>_observableThrow(e));
             }
-          } else return <Observable<number>>(<any>_observableThrow(response_));
+          } else return <Observable<void>>(<any>_observableThrow(response_));
         })
       );
   }
 
-  protected processImport(response: HttpResponseBase): Observable<number> {
+  protected processCreate(response: HttpResponseBase): Observable<void> {
     const status = response.status;
     const responseBlob =
       response instanceof HttpResponse
@@ -282,12 +283,7 @@ export class ClientService implements IClientService {
     if (status === 200) {
       return servicesLib.blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
-          let result200: any = null;
-          let resultData200 =
-            _responseText === ''
-              ? null
-              : parseInt(_responseText);
-          return _observableOf<number>(resultData200);
+          return _observableOf<void>(<any>null);
         })
       );
     } else {
@@ -313,7 +309,7 @@ export class ClientService implements IClientService {
 
   updateLanguage(niss: string, language: string): Observable<void> {
     console.log(niss,language);
-    let url_ = this.baseUrl + '/api/clients/updatelanguage/{niss}/{language}';
+    let url_ = this.baseUrl + '/clients/updatelanguage/{niss}/{language}';
     url_ = url_.replace('{niss}', encodeURIComponent('' + niss));
     url_ = url_.replace('{language}', encodeURIComponent('' + language));
     url_ = url_.replace(/[?&]$/, '');

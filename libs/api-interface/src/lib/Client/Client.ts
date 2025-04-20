@@ -1,16 +1,18 @@
 import { capitalize } from "libs/core-data/src/lib/services/share";
+import { Address } from "./Address";
 
 export interface IClient {
   clientId?: string;
-  civilStatus: string;
+  referenceNumber?: string;
+  civilStatus?: string;
   firstname: string;
   lastname: string;
   fullName: string | undefined;
   gender: string;
   birthDate: Date | undefined;
-  placeOfBith: string | undefined;
-  nationality: string;
-  ssn: string;
+  placeOfBith?: string | undefined;
+  nationality?: string;
+  ssn?: string;
   email?: string | undefined;
   phone?: string | undefined;
   mobilePhone?: string;
@@ -20,21 +22,22 @@ export interface IClient {
   supportEndDate?: Date | undefined;
   supports?: any[] | undefined;
   nativeLanguage?: string | undefined;
-  contactLanguage: string;
-  address?: string | undefined;
+  contactLanguage?: string;
+  address?: Address;
 }
 
 export class Client implements IClient {
   clientId?: string;
-  civilStatus: string;
+  referenceNumber?: string;
+  civilStatus?: string;
   firstname: string;
   lastname: string;
   fullName: string | undefined;
   gender: string;
   birthDate: Date | undefined;
-  placeOfBith: string | undefined;
-  nationality: string;
-  ssn: string;
+  placeOfBith?: string | undefined;
+  nationality?: string;
+  ssn?: string;
   email?: string | undefined;
   phone?: string | undefined;
   mobilePhone?: string;
@@ -44,8 +47,8 @@ export class Client implements IClient {
   supportEndDate?: Date | undefined;
   supports?: any[] | undefined;
   nativeLanguage?: string | undefined;
-  contactLanguage: string;
-  address?: string | undefined;
+  contactLanguage?: string;
+  address?: Address;
 
   constructor(data?: IClient) {
     if (data) {
@@ -76,7 +79,7 @@ export class Client implements IClient {
       this.supportEndDate = data['supportEndDate'];
       this.nativeLanguage = data['nativeLanguage'];
       this.contactLanguage = data['contactLanguage'];
-      this.address = data['address'];
+      this.address = Address.fromJS(data['address']);
 
       // if (Array.isArray(data['supports'])) {
 

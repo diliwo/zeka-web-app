@@ -1513,6 +1513,10 @@ export interface Gender {
   id: number;
   value: string;
 }
+export interface CivilStatus {
+  id: number;
+  value: string;
+}
 
 export interface ConsultItem {
   name: string;
