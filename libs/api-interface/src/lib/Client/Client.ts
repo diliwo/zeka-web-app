@@ -62,11 +62,11 @@ export class Client implements IClient {
   init(data?: any) {
     if (data) {
       this.clientId = data['clientId'];
-      this.civilStatus = data['civilStatus'];
+      this.civilStatus = CivilStatusConvertor(data['civilStatus']);
       this.firstname = data['firstName'];
       this.lastname = data['lastName'];
       this.fullName = data['lastName'] +' '+ capitalize(data['firstName']);
-      this.gender = data['gender'];
+      this.gender = GenderConvertor(data['gender']);
       this.birthDate = data['birthDate'];
       this.nationality = data['nationality'];
       this.ssn = data['niss'];
@@ -124,4 +124,44 @@ export class Client implements IClient {
     }
     return data;
   }
+}
+
+export function GenderConvertor(Result: number): string {
+  let result: string;
+
+  switch (Result) {
+    case 1:
+      result = 'Female';
+      break;
+    case 2:
+      result = 'Diverse';
+      break;
+    default:
+      result = 'Male';
+      break;
+  }
+  return result;
+}
+
+export function CivilStatusConvertor(Result: number): string {
+  let result: string;
+
+  switch (Result) {
+    case 1:
+      result = 'Single';
+      break;
+    case 2:
+      result = 'Married';
+      break;
+    case 3:
+      result = 'Widowed';
+      break;
+    case 3:
+      result = 'Divorced';
+      break;
+    default:
+      result = 'Other';
+      break;
+  }
+  return result;
 }

@@ -1,6 +1,6 @@
 <div *ngIf="client" class="container">
     <div class="card-style-identity card-style-identity-benef">
-        <div class="title-bloc"> INFOS ISP </div>
+        <div class="title-bloc"> CLIENT INFORMATION SHEET </div>
         <mat-card-content class="isp-infos">
             <mat-grid-list cols="5" rowHeight="35px">
                 <mat-grid-tile colspan="1" rowspan="2">
@@ -9,29 +9,29 @@
                 <mat-grid-tile colspan="3" rowspan="2">
                             <table class="table-ben-infos supports">
                                 <tr>
-                                    <th>Début aide ISP</th>
-                                    <th>Fin aide ISP</th>
-                                    <th>Consultant</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Assign client to</th>
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        <p>{{ (beneficiary.supportStartDate | date:'dd/MM/yyyy') || "-" }}</p>
+                                        <p>17 may 2012</p>
                                     </td>
                                     <td align="center">
-                                        <p>{{ (beneficiary.supportEndDate | date:'dd/MM/yyyy') || "-" }}</p>
+                                        <p>18 may 2024</p>
                                     </td>
                                     <td align="center">
-                                        <p>{{ beneficiary.supportReferentName || "-"}} {{beneficiary.supportReferentService || ""}}</p>
+                                        <p>Helen Ripley</p>
                                     </td>
                                 </tr>
                             </table>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="1" rowspan="2">
                   <div class="header-logo">
-                    <a (click)="goToBeneficiaryLink(beneficiary.niss)" class="gipsy-button" matTooltip="Voir infos dans Gipsy">
+                    <a (click)="goToBeneficiaryLink(client.niss)" class="gipsy-button">
                         <img
-                          src="/assets/images/icon-gipsy-150px.jpg"
-                          alt="homepage" width="50"
+                          src="/assets/images/zekaicon.png"
+                          alt="homepage" width="180"
                           class="text-logo"/>
                     </a>
                   </div>
@@ -47,10 +47,10 @@
                     <mat-card-title>
                         <div class="title-bloc-benef">
                             <button class="button-refresh" mat-icon-button matTooltip="Actualiser les données du bénéficiaire">
-                <!-- <mat-icon (click)="refresh(beneficiary.niss)" class="refresh-icon">refresh</mat-icon> -->
+                <!-- <mat-icon (click)="refresh(client.niss)" class="refresh-icon">refresh</mat-icon> -->
               </button>
                             <span class="example-spacer"></span>
-                            <p class="title-benef">INFOS BENEFICIAIRE</p>
+                            <p class="title-benef">PERSONAL INFORMATION</p>
                         </div>
                     </mat-card-title>
                 </mat-grid-tile>
@@ -59,7 +59,7 @@
                 <mat-grid-tile [colspan]="7" [rowspan]="1" class="grid-tile-style">
                     <mat-card-title>
                         <div class="title-bloc-benef">
-                            <p class="title-benef">DERNIERE FORMATION</p>
+                            <p class="title-benef">EDUCATIONAL BACKGROUND</p>
                         </div>
                     </mat-card-title>
                 </mat-grid-tile>
@@ -71,49 +71,39 @@
                             <table class="table-ben-infos">
                                 <tr>
                                     <td align="right">
-                                        <span>Nom</span> & <span>Prénom</span>&nbsp;:
+                                        <span>Surname</span> & <span>Firstname</span>&nbsp;:
                                     </td>
                                     <td align="left" width="100%">
-                                        <span class="label-content"><frontend-text-ellipsis>{{ beneficiary.fullName }}</frontend-text-ellipsis></span>
+                                        <span class="label-content"><frontend-text-ellipsis>{{ client.fullName }}</frontend-text-ellipsis></span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
                                 <!-- &nbsp;: -->
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>Niss</span>&nbsp;:
+                                        <span>Citizen number</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ beneficiary.niss }}</span>
+                                        <span class="label-content">89082135423</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
 
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>N° dossier</span>&nbsp;:
+                                        <span>Client number</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ beneficiary.referenceNumber }}</span>
+                                        <span class="label-content">7412895</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
                                 <tr>
-                                  <td align="right" width="50%">
-                                      <span>N° IBIS</span>&nbsp;:
-                                  </td>
-                                  <td align="left" width="50%">
-                                    <span [innerHTML]="beneficiary.ibisNumber" class="label-content"></span>
-                                    <mat-icon class="nLanguage-icon" (click)="upsertIbisNumber(beneficiary.niss)">create</mat-icon>
-                                </td>
-                                  <td width="5%"><span>&nbsp;</span></td>
-                              </tr>
-                                <tr>
                                     <td align="right" width="50%">
-                                        <span>As titulaire</span>&nbsp;:
+                                        <span>Nationality</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ beneficiary.socialWorkerName }}</span>
+                                        <span class="label-content">Belgian</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
@@ -130,17 +120,16 @@
                         <mat-card-content>
                             <table class="table-benf-formations">
                                 <tr class="tr-benf-formations">
-                                    <th class="tx-benf-formations">FORMATION</th>
-                                    <th class="tx-benf-formations">RESULTAT</th>
-                                    <th class="tx-benf-formations">DATE DEBUT</th>
-                                    <th class="tx-benf-formations">DATE FIN</th>
+                                    <th class="tx-benf-formations">COURSE</th>
+                                    <th class="tx-benf-formations">RESULT</th>
+                                    <th class="tx-benf-formations">FROM</th>
+                                    <th class="tx-benf-formations">TO</th>
                                 </tr>
                                 <tr class="tr-benf-formations">
-                                    <td class="tx-benf-formations">{{beneficiary.lastFormationName | uppercase}}</td>
-                                    <td class="tx-benf-formations">{{beneficiary.lastFormationResultName | uppercase}}</td>
-                                    <td class="tx-benf-formations">{{(beneficiary.lastFormationStartDate | date:'dd/MM/yyyy') || "-" }}
-                                    </td>
-                                    <td class="tx-benf-formations">{{(beneficiary.lastFormationEndDate | date:'dd/MM/yyyy') || "-" }}</td>
+                                    <td class="tx-benf-formations">CESS</td>
+                                    <td class="tx-benf-formations">In progress</td>
+                                    <td class="tx-benf-formations">12/09/2022</td>
+                                    <td class="tx-benf-formations">{{(client.lastFormationEndDate | date:'dd/MM/yyyy') || "-" }}</td>
                                 </tr>
                             </table>
 
@@ -155,51 +144,50 @@
                             <table class="table-ben-infos">
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>Date de naissance</span>&nbsp;:
+                                        <span>Date of birth</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ (beneficiary.birthDate | date:'dd/MM/yyyy') || "Néant"}}</span>
+                                        <span class="label-content">{{ (client.birthDate | date:'dd/MM/yyyy') || "Néant"}}</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
 
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>Genre</span>&nbsp;:
+                                        <span>Sex</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ beneficiary.gender }}</span>
+                                        <span class="label-content">{{ client.gender }}</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
 
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>Etat civil</span>&nbsp;:
+                                        <span>Civil status</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ beneficiary.civilStatus }}</span>
+                                        <span class="label-content">{{ client.civilStatus }}</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
 
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>Langue maternelle</span>&nbsp;:
+                                        <span>Native language</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span [innerHTML]="beneficiary.nativeLanguage" class="label-content"></span>
-                                        <mat-icon class="nLanguage-icon" (click)="updateNativeLanguage(beneficiary.niss)">create</mat-icon>
+                                        <span [innerHTML]="client.nativeLanguage" class="label-content"></span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
 
                                 <tr>
                                     <td align="right" width="50%">
-                                        <span>Langue contact</span>&nbsp;:
+                                        <span>Place of Birth</span>&nbsp;:
                                     </td>
                                     <td align="left" width="50%">
-                                        <span class="label-content">{{ beneficiary.contactLanguage }}</span>
+                                        <span class="label-content">Brussels</span>
                                     </td>
                                     <td width="5%"><span>&nbsp;</span></td>
                                 </tr>
@@ -213,7 +201,7 @@
                 <mat-grid-tile [colspan]="7" [rowspan]="1" class="grid-tile-style">
                     <mat-card-title>
                         <div class="title-bloc-benef">
-                            <p class="title-benef">DERNIER EMPLOI</p>
+                            <p class="title-benef">LAST WORK EXPERIENCE</p>
                         </div>
                     </mat-card-title>
                 </mat-grid-tile>
@@ -224,16 +212,16 @@
                       <mat-card-content>
                           <table class="table-benf-formations">
                               <tr class="tr-benf-formations">
-                                  <th class="tx-benf-formations">DATE DEBUT</th>
-                                  <th class="tx-benf-formations">DATE FIN</th>
-                                  <th class="tx-benf-formations">FONCTION</th>
-                                  <th class="tx-benf-formations">ENTREPRISE</th>
+                                  <th class="tx-benf-formations">FROM</th>
+                                  <th class="tx-benf-formations">TO</th>
+                                  <th class="tx-benf-formations">POSITION TITLE</th>
+                                  <th class="tx-benf-formations">COMPANY</th>
                               </tr>
                               <tr class="tr-benf-formations">
-                                <td class="tx-benf-formations">{{(beneficiary.lastJobExperienceStartDate | date:'dd/MM/yyyy') || "-" }}</td>
-                                <td class="tx-benf-formations">{{(beneficiary.lastJobExperienceEndDate | date:'dd/MM/yyyy') || "-" }}</td>
-                                  <td class="tx-benf-formations">{{(beneficiary.lastJobExperienceFunction | uppercase) || "-" }}</td>
-                                  <td class="tx-benf-formations">{{(beneficiary.lastJobExperienceCompanyName | uppercase) || "-" }}</td>
+                                <td class="tx-benf-formations">13/09/2018</td>
+                                <td class="tx-benf-formations">15/02/2019</td>
+                                  <td class="tx-benf-formations">Kitchen helper</td>
+                                  <td class="tx-benf-formations">Lunch garden</td>
                               </tr>
                           </table>
                       </mat-card-content>
@@ -247,31 +235,31 @@
                                         <table class="table-ben-infos">
                                             <tr>
                                                 <td align="right" width="50%">
-                                                    <span>Adresse :</span>
+                                                    <span>Address :</span>
                                                 </td>
                                                 <td align="left" width="50%">
-                                                    <!-- <span class="label-content">:&nbsp;{{beneficiary.address || "Néant" }}</span> -->
-                                                    <span class="label-content"><frontend-text-ellipsis>{{beneficiary.address}}</frontend-text-ellipsis></span>
+                                                    <span class="label-content">:&nbsp;Avenue Chazal 12, Brussels 1030</span>
+                                                    <!-- <span class="label-content"><frontend-text-ellipsis>{{client.address}}</frontend-text-ellipsis></span> -->
                                                 </td>
                                                 <td width="5%"><span>&nbsp;</span></td>
                                             </tr>
 
                                             <tr>
                                                 <td align="right" width="50%">
-                                                    <span>Téléphone fixe</span>&nbsp;:
+                                                    <span>Phone</span>&nbsp;:
                                                 </td>
                                                 <td align="left" width="50%">
-                                                    <span class="label-content">{{ beneficiary.phone || "Néant" }}</span>
+                                                    <span class="label-content">{{ client.phone || "N/A" }}</span>
                                                 </td>
                                                 <td width="5%"><span>&nbsp;</span></td>
                                             </tr>
 
                                             <tr>
                                               <td align="right" width="50%">
-                                                  <span>Téléphone mobile</span>&nbsp;:
+                                                  <span>Mobile phone</span>&nbsp;:
                                               </td>
                                               <td align="left" width="50%">
-                                                  <span class="label-content">{{ beneficiary.mobilePhone || "Néant" }}</span>
+                                                  <span class="label-content">{{ client.mobilePhone || "N/A" }}</span>
                                               </td>
                                               <td width="5%"><span>&nbsp;</span></td>
                                           </tr>
@@ -281,7 +269,7 @@
                                                     <span>Email</span>&nbsp;:
                                                 </td>
                                                 <td align="left" width="50%">
-                                                    <span class="label-content">{{ beneficiary.email || "Néant"}}</span>
+                                                    <span class="label-content">{{ client.email || "Néant"}}</span>
                                                 </td>
                                                 <td width="5%"><span>&nbsp;</span></td>
                                             </tr>
@@ -295,7 +283,7 @@
                 <mat-grid-tile [colspan]="7" [rowspan]="1" class="grid-tile-style">
                     <mat-card-title>
                         <div class="title-bloc-benef">
-                            <p class="title-benef">DERNIER PIIS SIGNE</p>
+                            <p class="title-benef">REASON FOR INVOLVEMENT</p>
                         </div>
                     </mat-card-title>
                 </mat-grid-tile>
@@ -304,22 +292,7 @@
                 <mat-grid-tile [colspan]="7" [rowspan]="3">
                     <mat-card>
                       <mat-card-content>
-                        <table class="table-benf-formations">
-                            <tr class="tr-benf-formations">
-                                <th class="tx-benf-formations">TYPE PIIS</th>
-                                <th class="tx-benf-formations">DATE DEBUT</th>
-                                <th class="tx-benf-formations">DATE FIN</th>
-                                <th class="tx-benf-formations">DATE CLOTURE</th>
-                                <th class="tx-benf-formations">TS  TRAITANT</th>
-                            </tr>
-                            <tr class="tr-benf-formations">
-                              <td class="tx-benf-formations">{{(beneficiary.contratPiis.libelle | uppercase) || "-" }}</td>
-                              <td class="tx-benf-formations">{{(beneficiary.contratPiis.startDate | date:'dd/MM/yyyy') || "-" }}</td>
-                              <td class="tx-benf-formations">{{(beneficiary.contratPiis.endDate | date:'dd/MM/yyyy') || "-" }}</td>
-                              <td class="tx-benf-formations">{{(beneficiary.lastEvaluationDate | date:'dd/MM/yyyy') || "-" }}</td>
-                              <td class="tx-benf-formations">{{(beneficiary.contratPiis.asTraitant | uppercase) || "-" }}</td>
-                            </tr>
-                        </table>
+                        <p>Parenting concerns and possible criminal exploitation.</p>
                     </mat-card-content>
                     </mat-card>
                 </mat-grid-tile>

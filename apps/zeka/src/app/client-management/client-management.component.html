@@ -1,63 +1,52 @@
 <ng-container *ngIf="{
     pos: position$ | async,
-    benefId: benefId$ | async
+    clientId: clientId$ | async
   } as apiData">
     <nav mat-tab-nav-bar>
-        <a mat-tab-link [routerLink]="['/beneficiary', apiData.pos]" routerLinkActive [routerLinkActiveOptions]="{ exact: true }" #rtlInfo="routerLinkActive" [active]="rtlInfo.isActive">
-            <mat-icon class="example-tab-icon" style="color: rgb(76, 175, 80)">person</mat-icon>&nbsp;Signalétique
+        <a mat-tab-link [routerLink]="['/client', apiData.pos]" routerLinkActive [routerLinkActiveOptions]="{ exact: true }" #rtlInfo="routerLinkActive" [active]="rtlInfo.isActive">
+            <mat-icon class="example-tab-icon" style="color: #0178d4">person</mat-icon>&nbsp;Client information sheet
         </a>
 
-        <a mat-tab-link [routerLink]="['/beneficiary', apiData.pos, 'support', apiData.benefId]" routerLinkActive [routerLinkActiveOptions]="{ exact: true }" #rtlSupport="routerLinkActive" [active]="rtlSupport.isActive">
-            <span class="material-icons" style="color: rgb(76, 175, 80)">supervisor_account</span
-      >&nbsp;Accompagnements
+        <a mat-tab-link [routerLink]="['/client', apiData.pos, 'support', apiData.benefId]" routerLinkActive [routerLinkActiveOptions]="{ exact: true }" #rtlSupport="routerLinkActive" [active]="rtlSupport.isActive">
+            <span class="material-icons" style="color: #0178d4">supervisor_account</span
+      >&nbsp;Case tracker
     </a>
 
     <a
       mat-tab-link
-      [routerLink]="['/beneficiary', apiData.pos, 'jobs']"
+      [routerLink]="['/client', apiData.pos, 'jobs']"
       routerLinkActive
       [routerLinkActiveOptions]="{ exact: true }"
       #rtlJob="routerLinkActive"
       [active]="rtlJob.isActive"
     >
-      <mat-icon style="color: rgb(76, 175, 80)">work</mat-icon>&nbsp;Emplois
+      <mat-icon style="color: #0178d4">work</mat-icon>&nbsp;Work experience
     </a>
 
     <a
       mat-tab-link
       [routerLinkActiveOptions]="{ exact: false }"
-      [routerLink]="['/beneficiary', apiData.pos, 'formations']"
+      [routerLink]="['/client', apiData.pos, 'formations']"
       routerLinkActive
       [routerLinkActiveOptions]="{ exact: true }"
       #rtlSchool="routerLinkActive"
       [active]="rtlSchool.isActive"
     >
-      <mat-icon style="color: rgb(76, 175, 80)">school</mat-icon
-      >&nbsp;Formations
+      <mat-icon style="color: #0178d4">school</mat-icon
+      >&nbsp;Educational background
     </a>
     <a
       mat-tab-link
       [routerLinkActiveOptions]="{ exact: false }"
-      [routerLink]="['/beneficiary', apiData.pos, 'suivis']"
+      [routerLink]="['/client', apiData.pos, 'suivis']"
       routerLinkActive
       [routerLinkActiveOptions]="{ exact: true }"
       #rtlSuivi="routerLinkActive"
       [active]="rtlSuivi.isActive"
     >
-      <mat-icon style="color: rgb(76, 175, 80)">compare_arrows</mat-icon
-      >&nbsp;Suivis trimistriels
+      <mat-icon style="color: #0178d4">compare_arrows</mat-icon
+      >&nbsp;Monitoring report
     </a>
-    <a
-    mat-tab-link
-    [routerLinkActiveOptions]="{ exact: false }"
-    [routerLink]="['/beneficiary', apiData.pos, 'bilan']"
-    routerLinkActive
-    [routerLinkActiveOptions]="{ exact: true }"
-    #rtlBilan="routerLinkActive"
-    [active]="rtlBilan.isActive"
-  >
-    <mat-icon style="color: rgb(76, 175, 80)">summarize</mat-icon>&nbsp;Bilans
-  </a>
   </nav>
   <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 </ng-container>
