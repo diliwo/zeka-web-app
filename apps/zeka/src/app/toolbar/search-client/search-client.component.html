@@ -5,7 +5,7 @@
         <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let option of (allClientsLookUp$ | async)?.clientsLookUp" [value]="option" (click)="onSelectClient()">
-                <a>{{option.name}} | {{option.referenceNumber}} ({{option.clientId}})</a>
+                <a>{{option.name}}</a>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>

@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '', component: DashboardComponent
   },
   {
-    path: 'beneficiary/:niss', data: { preload: true },
+    path: 'client',
+    loadChildren: () => import('./client-management/client-management.module').then(m => m.ClientManagementModule)
+  },
+  {
+    path: 'client/:id', data: { preload: true },
     loadChildren: () => import('./client-management/client-management.module').then(m => m.ClientManagementModule)
   },
   { path: 'admin',

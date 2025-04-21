@@ -8,10 +8,14 @@ import { SharedModule} from '@frontend/shared';
 import { NgxEditorModule } from 'ngx-editor';
 import { ClientRoutingModule } from './client-management-routing.module';
 import { ClientDetailsComponent } from './Clients/client-details/client-details.component';
+import { ClientsComponent } from './Clients/clients.component';
+import { ClientManagementComponent } from './client-management.component';
 
 @NgModule({
   declarations: [
-    ClientDetailsComponent
+    ClientDetailsComponent,
+    ClientsComponent,
+    ClientManagementComponent
   ],
   imports: [
     SharedModule,

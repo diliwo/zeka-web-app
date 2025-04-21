@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 import { ClientsComponent } from './Clients/clients.component';
 
 @Component({
-  selector: 'frontend-beneficiaries',
+  selector: 'frontend-client-management',
   templateUrl: './client-management.component.html',
   styleUrls: ['./client-management.component.scss']
 })
 export class ClientManagementComponent {
-  public beneficiaryInfoIsActive = false;
+  public clientInfoIsActive = false;
   position$: Observable<string> = this.positionFacadeService.position$;
-  benefId$: Observable<number> = this.positionFacadeService.clientId$;
+  clientId$: Observable<number> = this.positionFacadeService.clientId$;
 
   constructor(
     public snackBar: MatSnackBar,
@@ -27,7 +27,7 @@ export class ClientManagementComponent {
 
   onRouterOutletActivate(componentRef: Event) {
     if (componentRef instanceof ClientsComponent) {
-      this.beneficiaryInfoIsActive = true;
+      this.clientInfoIsActive = true;
     }
   }
 

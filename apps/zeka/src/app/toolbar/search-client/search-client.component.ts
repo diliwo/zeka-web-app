@@ -59,7 +59,7 @@ export class SearchClientComponent implements OnInit {
   }
 
   onSelectClient() {
-    this.router.navigate(['/clients',this.myControl.value.clientId]);
+    this.router.navigate(['/client',this.myControl.value.clientId]);
     this.myControl.setValue('');
   }
 }

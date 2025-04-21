@@ -21,8 +21,22 @@ export class ClientsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.refreshClientPage(true);
     this.clientsFacade.mutations$.subscribe((_) => {
       this.clientsFacade.selectClient(this.globalId);
     });
+  }
+
+
+  refreshClientPage(result : boolean){
+    if(result){
+      this.actRoute.paramMap.subscribe(params => {
+        let id = '';
+        id = params.get('id');
+        this.globalId = parseInt(id);
+        this.clientsFacade.selectClient(this.globalId);
+        this.positionFacadeServices.getPosition(id);
+      });
+    }
   }
 }

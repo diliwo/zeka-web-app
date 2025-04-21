@@ -141,6 +141,7 @@ export class ClientService implements IClientService {
       responseType: 'blob',
       headers: new HttpHeaders({
         Accept: 'application/json',
+        Tenant:'Zeka'
       }),
     };
 
@@ -395,6 +396,7 @@ export class ClientService implements IClientService {
       responseType: 'blob',
       headers: new HttpHeaders({
         Accept: 'application/json',
+        Tenant:'Zeka'
       }),
     };
 
